@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 // import styles from './layout.module.css'
 import styles from "../styles/Layout.module.css";
+import styles2 from "../styles/Home.module.css";
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import Header from './NavBar'
@@ -14,9 +15,10 @@ const name = 'Your Name'
 export const siteTitle = 'Next.js Sample Website'
 
 const Wrapper = styled.section`
-  padding: 4em;
+  padding: 0em;
   background: papayawhip;
-  
+  /* min-height: 100vh; */
+  height: 100%;
 `;
 
 
@@ -28,6 +30,12 @@ export default function Layout({
   home?: boolean
 }) {
   return (
+    <div style = {
+      {
+        height:"100vh"
+      }
+
+      }> 
     <Wrapper>
     <div className={styles.container}>
       <Head>
@@ -58,8 +66,12 @@ export default function Layout({
       )}
       
       <Footer/>
+      <div className={styles2.footer2}>
+      <p id="footer" > Hello world</p>
+      </div>
 
     </div>
     </Wrapper>
+    </div>
   )
 }

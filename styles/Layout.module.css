@@ -7,7 +7,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: 0rem 1rem;
+  background-color:darkgrey
 }
 
 .hamburger {
@@ -31,14 +32,14 @@
 }
 
 .navitem {
-  margin-left: 5rem;
+  margin-left: 2rem;
 }
 
 .navlink{
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 400;
   color: #475569;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .navlink:hover{
@@ -46,7 +47,7 @@
 }
 
 .navlogo {
-  font-size: 2.1rem;
+  font-size: 2rem;
   font-weight: 500;
   color: #482ff7;
 }
@@ -96,4 +97,12 @@
 
 .footer {
   font-size: 1.5rem;
+  background-color:darkgrey
+}
+
+.footer2 {
+  position : absolute;
+  bottom : 0;
+  height : 40px;
+  margin-top : 40px;
 }

@@ -23,7 +23,7 @@ const Footer = () => {
             <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
             </a>
         </footer>
-      </div>
+    </div>
   )
 }
 
