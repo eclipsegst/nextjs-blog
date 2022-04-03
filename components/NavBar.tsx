@@ -6,85 +6,72 @@ import styles from "./layout.module.css";
 
 
 export const links = [
-  { path: "employee", title: "For Employees" },
-  { path: "job-seekers", title: "For Job Seekers" },
-  { path: "entrepreneurs", title: "For Entrepreneurs" },
-  { path: "blog", title: "Blog" },
+  { path: "/", title: "Home" },
+  { path: "about", title: "About" },
+  { path: "blogs", title: "Blogs" },
+  { path: "contact", title: "Contact" },
 ]
-const Header = () => {
-  const [isOpen,setIsOpen] = useState(false);
-  const openMenu= ()=> setIsOpen(!isOpen);
-  return (
-    // <HeaderContainer>
-    //   <LogoWrap>
-    //     <Link href="/" >
-    //       <H2>
-    //         <Logo href="/">earner</Logo>
-    //       </H2>
-    //     </Link>
-    //   </LogoWrap>
 
-    //   <Links>
-    //     {links.map((item: any, index: any) => (
-    //       <Li key={index}>
-    //         {/* <MenuLink to={`/${item.path}`}>{item.title}</MenuLink> */}
-    //         <Link href={`/posts/${item.path}`}>
-    //               <a>{item.title}</a>
-    //             </Link>
-    //       </Li>
-    //     ))}
-    //   </Links>
-    //   {/* <SideMenu /> */}
-    // </HeaderContainer>
-          
-    // <header className={styles2.header}>
-    <nav className={styles.navbar}>
+const HeaderContainer = styled.header`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--bg);
+  /* background-color: orange; */
+  padding: 1rem 2rem;
+`
+
+const Links = styled.ul`
+  display: flex;
+  flex-direction: row;
+  padding: 0rem 1rem;
+  margin: 0px 0px 0px 0px;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+const Li = styled.li`
+  list-style: none;
+  &:hover {
+    border-bottom: 5px solid var(--green);
+  }
+`
+
+const MenuLink = styled(Link)`
+  transition: 0.2s opacity cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover {
+    opacity: 0.8;
+  }
+  color: var(--radiantBlue);
+  font-family: var(--semibold);
+  &:hover,
+  &:active {
+    color: var(--radiantBlue);
+    border-bottom: 3px solid var(--radiantBlue);
+    padding-bottom: 10px;
+  }
+`
+
+const Header = () => {
+  return ( 
+    <HeaderContainer>
       <Link href='/'>
         <a className={styles.navlogo}>Brand</a>
       </Link>
-      <ul className={isOpen === false ? 
-              styles.navmenu : styles.navmenu +' '+ styles.active}>
-          <li className={styles.navitem}>
-            <Link href='/'>
-              <a className={isOpen === false ? 
-                          styles.navlink : styles.navlink+' '+styles.active}
-                          onClick={openMenu}>Home</a>
-              </Link>
-          </li>
-          <li className={styles.navitem}>
-              <Link href='/blogs'>
-                <a className={isOpen === false ? 
-                          styles.navlink : styles.navlink+' '+styles.active}
-                          onClick={openMenu}>Blogs</a>
-              </Link>
-          </li>
-          <li className={styles.navitem}>
-              <Link href='/about'>
-                <a className={isOpen === false ? 
-                          styles.navlink : styles.navlink+' '+styles.active}
-                          onClick={openMenu}>About</a>
-              </Link>
-          </li>
-          <li className={styles.navitem}>
-              <Link href='/contact'>
-              <a className={isOpen === false ? 
-                          styles.navlink : styles.navlink+' '+styles.active}
-                          onClick={openMenu}>Contact</a>
-              </Link>
-          </li>
-      </ul>
-    <button className={isOpen === false ? 
-                        styles.hamburger : styles.hamburger+' '+styles.active}
-                        onClick={openMenu}
-                        >
-        <span className={styles.bar}></span>
-        <span className={styles.bar}></span>
-        <span className={styles.bar}></span>
-    </button>
-    </nav>
-// </header>
+
+      <Links>
+        {links.map((item: any, index: any) => (
+          <Li className={styles.navitem} key={index}>
+            <Link href={`/${item.path}`}>
+                  <a className={styles.navlink}>{item.title}</a>
+                </Link>
+          </Li>
+        ))}
+      </Links>
+    </HeaderContainer>
   )
 }
 
 export default Header
-
