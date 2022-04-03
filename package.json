@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.24",
     "date-fns": "^2.25.0",
     "gray-matter": "^4.0.3",
     "next": "^11.0.0",
