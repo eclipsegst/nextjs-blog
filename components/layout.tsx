@@ -1,10 +1,8 @@
 import Image from 'next/image'
 import styles from './layout.module.css'
-import Link from 'next/link'
 import Header from './NavBar'
 import Footer from './Footer'
 import styled from 'styled-components'
-import Head from 'next/head';
 
 import { DEFAULT_MAX_VERSION } from 'tls'
 
@@ -14,12 +12,11 @@ const Wrapper = styled.section`
   padding: 0em;
   background: papayawhip;
   /* height: 100%; */
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 60px);
 `;
 
 const ContentWrapper = styled.main`
-  background: #deeefb;
-  /* display: flex; */
+  /* background: #deeefb; */
   flex: 1;
   display: flex;
   flex-direction: column;

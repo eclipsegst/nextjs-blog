@@ -3,7 +3,7 @@ import React from "react"
 import { useState } from "react";
 import styled from "styled-components"
 import styles from "./layout.module.css";
-
+import { grey, paleGrey } from '../utils/colors';
 
 export const links = [
   { path: "/", title: "Home" },
@@ -18,7 +18,7 @@ const HeaderContainer = styled.header`
   flex-direction: row;
   justify-content: space-between;
   background-color: var(--bg);
-  /* background-color: orange; */
+  background-color: ${paleGrey};
   padding: 1rem 2rem;
 `
 

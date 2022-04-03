@@ -17,16 +17,6 @@ export default function Home() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      
-      <Title>Welcome </Title>
-
-      <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this in{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
-      </section>
 
       <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>

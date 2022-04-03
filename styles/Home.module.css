@@ -27,14 +27,6 @@
   align-items: center;
 }
 
-
-.footer2 {
-  position : absolute;
-  bottom : 0;
-  height : 40px;
-  margin-top : 40px;
-}
-
 .footer img {
   margin-left: 0.5rem;
 }
