@@ -8,13 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.24",
     "date-fns": "^2.25.0",
     "gray-matter": "^4.0.3",
     "next": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.2"
+    "remark-html": "^13.0.2",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@types/node": "^16.11.6",
