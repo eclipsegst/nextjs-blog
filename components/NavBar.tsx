@@ -53,6 +53,13 @@ const Header = () => {
             </Link>
         </li>
         <li className={styles.navitem}>
+            <Link href='/blogs'>
+              <a className={isOpen === false ? 
+                        styles.navlink : styles.navlink+' '+styles.active}
+                        onClick={openMenu}>Blogs</a>
+            </Link>
+        </li>
+        <li className={styles.navitem}>
             <Link href='/about'>
               <a className={isOpen === false ? 
                         styles.navlink : styles.navlink+' '+styles.active}

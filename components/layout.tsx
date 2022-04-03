@@ -6,11 +6,19 @@ import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import Header from './NavBar'
 import Footer from './Footer'
+import styled from 'styled-components'
 
 import { DEFAULT_MAX_VERSION } from 'tls'
 
 const name = 'Your Name'
 export const siteTitle = 'Next.js Sample Website'
+
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+  
+`;
+
 
 export default function Layout({
   children,
@@ -20,6 +28,7 @@ export default function Layout({
   home?: boolean
 }) {
   return (
+    <Wrapper>
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
@@ -51,5 +60,6 @@ export default function Layout({
       <Footer/>
 
     </div>
+    </Wrapper>
   )
 }
