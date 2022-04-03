@@ -16,8 +16,8 @@ export default function Home({
   }[]
 }) {
   return (
-    <Layout home children={undefined}>
-      <Head children={undefined}>
+    <Layout home>
+      <Head>
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
