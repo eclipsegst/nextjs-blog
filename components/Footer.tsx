@@ -1,8 +1,7 @@
 import React from "react"
 import Link from 'next/link'
 import styled from "styled-components"
-import styles from "../styles/Layout.module.css";
-import styles2 from '../styles/Home.module.css'
+import styles from "./layout.module.css";
 import rem from '../utils/rem';
 import { grey, paleGrey, red } from '../utils/colors';
 

@@ -2,7 +2,14 @@ import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import styles from '../styles/Home.module.css'
+import styled from 'styled-components'
 // Create a Wrapper component that'll render a <section> tag with some styles
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: left;
+  color: palevioletred;
+`;
 
 export default function Home() {
   return (
@@ -10,6 +17,9 @@ export default function Home() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      
+      <Title>Welcome </Title>
+
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>
@@ -18,6 +28,15 @@ export default function Home() {
         </p>
       </section>
 
+      <h1 className={styles.title}>
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
+
+        <p className={styles.description}>
+          Get started by editing{' '}
+          <code className={styles.code}>pages/index.js</code>
+        </p>
+        
       <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>

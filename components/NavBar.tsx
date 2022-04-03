@@ -2,8 +2,7 @@ import Link from 'next/link'
 import React from "react"
 import { useState } from "react";
 import styled from "styled-components"
-import styles from "../styles/Layout.module.css";
-import styles2 from '../styles/Home.module.css'
+import styles from "./layout.module.css";
 
 
 export const links = [
