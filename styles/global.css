@@ -25,3 +25,41 @@ img {
   max-width: 100%;
   display: block;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,body, body * { 
+  font-family: 'Open Sans', sans-serif; 
+  color:inherit;
+  background-color:inherit;
+ font-size: 1rem;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  font-size: inherit;
+}
+button {
+background: transparent;
+border: none;
+cursor: pointer;
+padding: 0;
+}
+
+button:hover,
+button:focus {
+  background:transparent;
+}
+
+button:focus {
+  outline: none;
+
+}
