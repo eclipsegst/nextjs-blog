@@ -6,21 +6,16 @@ import rem from '../utils/rem';
 import { grey, paleGrey, red } from '../utils/colors';
 
 const Wrapper = styled.footer`
-  bottom : 0;
-  height : 60px;
-  min-height: 5vh;
-  width: 100%;
-  padding: 0 0.5rem;
-  /* margin-top: ${rem(50)}; */
+  min-height: 60px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* color: grey;
-  background: #efefef; */
   color: ${grey};
   background: ${paleGrey};
+  box-sizing: border-box;
+  // margin-top: ${rem(50)};
 `;
 
 const SmallText = styled.p`
@@ -30,7 +25,7 @@ const SmallText = styled.p`
 const Footer = () => {
   return (
     <Wrapper>
-      <SmallText> ©️ Copy Right 2022</SmallText>
+      <SmallText> ©️ Copyright 2022</SmallText>
     </Wrapper>
   )
 }

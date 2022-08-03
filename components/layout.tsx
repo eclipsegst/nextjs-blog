@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './layout.module.css'
-import Header from './NavBar'
+import Navbar from './Navbar'
 import Footer from './Footer'
 import styled from 'styled-components'
 
@@ -35,7 +35,7 @@ export default function Layout({
     <div>
       <Wrapper>
         <div className={styles.container}>
-          <Header/>
+          <Navbar/>
           
           <ContentWrapper>{children}</ContentWrapper>
 

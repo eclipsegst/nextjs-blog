@@ -1,9 +1,9 @@
-import Link from 'next/link'
 import React from "react"
-import { useState } from "react";
 import styled from "styled-components"
+import Link from 'next/link'
 import styles from "./layout.module.css";
-import { grey, paleGrey } from '../utils/colors';
+import { paleGrey } from '../utils/colors';
+import rem from '../utils/rem';
 
 export const links = [
   { path: "/", title: "Home" },
@@ -19,59 +19,59 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   background-color: var(--bg);
   background-color: ${paleGrey};
-  padding: 1rem 2rem;
+  padding: 0rem 0rem 0rem 2rem;
 `
-
-const Links = styled.ul`
+const Wrapper = styled.nav`
   display: flex;
-  flex-direction: row;
-  padding: 0rem 1rem;
-  margin: 0px 0px 0px 0px;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`
+  align-items: center;
+  flex: 0 0 auto;
+  margin-right: ${rem(32)};
+`;
 
-const Li = styled.li`
-  list-style: none;
-  &:hover {
-    border-bottom: 5px solid var(--green);
-  }
-`
+const NavLink = styled(Link).attrs((/* props */) => ({
+  unstyled: true,
+}))`
+  flex: 0 0 auto;
+  display: inline-block;
+  line-height: ${rem(50)};
+  transition: opacity 0.2s, transform 0.2s;
+  cursor: pointer;
+  letter-spacing: ${rem(0.4)};
+  color: currentColor;
+`;
 
-const MenuLink = styled(Link)`
-  transition: 0.2s opacity cubic-bezier(0.075, 0.82, 0.165, 1);
-  &:hover {
-    opacity: 0.8;
-  }
-  color: var(--radiantBlue);
-  font-family: var(--semibold);
+const StyledNavLink = styled(styled.a``)`
+  // margin: 20px 0 10px;
+  padding: 15px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
   &:hover,
-  &:active {
-    color: var(--radiantBlue);
-    border-bottom: 3px solid var(--radiantBlue);
-    padding-bottom: 10px;
+  &:focus {
+    color: black;
+    opacity: 0.6;
   }
-`
+  &:active {
+    color: red;
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+`;
 
-const Header = () => {
+const Navbar = () => {
   return ( 
     <HeaderContainer>
       <Link href='/'>
         <a className={styles.navlogo}>Brand</a>
       </Link>
 
-      <Links>
-        {links.map((item: any, index: any) => (
-          <Li className={styles.navitem} key={index}>
-            <Link href={`/${item.path}`}>
-                  <a className={styles.navlink}>{item.title}</a>
-                </Link>
-          </Li>
-        ))}
-      </Links>
+      <Wrapper>
+      {links.map((item: any, index: any) => (
+          <NavLink href={`/${item.path}`}><StyledNavLink>{item.title}</StyledNavLink></NavLink>
+      ))}
+      </Wrapper>
     </HeaderContainer>
   )
 }
 
-export default Header
+export default Navbar
