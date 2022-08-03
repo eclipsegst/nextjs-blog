@@ -7,9 +7,8 @@ import rem from '../utils/rem';
 
 export const links = [
   { path: "/", title: "Home" },
-  { path: "about", title: "About" },
   { path: "blogs", title: "Blogs" },
-  { path: "contact", title: "Contact" },
+  { path: "about", title: "About" },
 ]
 
 const HeaderContainer = styled.header`

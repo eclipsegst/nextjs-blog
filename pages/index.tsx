@@ -1,31 +1,16 @@
-import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
-import styles from '../styles/Home.module.css'
 import styled from 'styled-components'
-// Create a Wrapper component that'll render a <section> tag with some styles
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: left;
-  color: palevioletred;
-`;
+import Layout, { Title } from '../components/Layout'
+import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
     <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-
-      <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+      <Title>Home</Title>
+      
+      <p className={styles.description}>
+        Get started by editing{' '}
+        <code className={styles.code}>pages/index.js</code>
+      </p>
         
       <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
