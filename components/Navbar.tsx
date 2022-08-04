@@ -7,8 +7,8 @@ import rem from '../utils/rem';
 
 export const links = [
   { path: "/", title: "Home" },
-  { path: "blogs", title: "Blogs" },
-  { path: "about", title: "About" },
+  { path: "/blogs", title: "Blogs" },
+  { path: "/about", title: "About" },
 ]
 
 const HeaderContainer = styled.header`
@@ -66,7 +66,7 @@ const Navbar = () => {
 
       <Wrapper>
       {links.map((item: any, index: any) => (
-          <NavLink href={`/${item.path}`} key={index}><StyledNavLink>{item.title}</StyledNavLink></NavLink>
+          <NavLink href={`${item.path}`} key={index}><StyledNavLink>{item.title}</StyledNavLink></NavLink>
       ))}
       </Wrapper>
     </HeaderContainer>
