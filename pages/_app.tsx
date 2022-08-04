@@ -3,6 +3,8 @@ import { AppProps } from 'next/app'
 import Head from 'next/head';
 import React from 'react';
 
+import { SessionProvider } from "next-auth/react"
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -13,8 +15,14 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
           <meta name="theme-color" content="#da936a" />
-        </Head>
-      <Component {...pageProps} />
+      </Head>
+      <SessionProvider
+        // Provider options are not required but can be useful in situations where
+        // you have a short session maxAge time. Shown here with default values.
+        session={pageProps.session}
+      >
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   )
 }

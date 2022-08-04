@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from './layout.module.css'
 import Navbar from './Navbar'
+import Header from "./header"
 import Footer from './Footer'
 import styled, { css } from 'styled-components';
 import rem from '../utils/rem';
@@ -64,7 +65,8 @@ export default function Layout({
 }) {
   return (
     <Container>
-      <Navbar/>
+      <Header />
+      {/* <Navbar/> */}
       <ContentWrapper>{children}</ContentWrapper>
       <Footer/>
     </Container>
@@ -80,7 +82,7 @@ export const Title = styled.h1`
   font-family: ${headerFont};
 `;
 
-export const Header = styled.h2`
+export const Header2 = styled.h2`
   font-size: ${rem(32)};
   font-weight: 600;
   font-family: ${headerFont};
