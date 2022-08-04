@@ -4,6 +4,20 @@ This is a starter template for Next.js with TypeScript.
 
 ## Getting Started
 
+### Configure local environment
+Copy the .env.local.example file in this directory to .env.local (which will be ignored by Git):
+```
+cp .env.local.example .env.local
+```
+
+Configurate DATABASE_URL,
+```
+cp .env.local /prisma/.env
+mv ./prisma/.env.local ./prisma/.env
+```
+Follow [prisma/README](prisma/README.md) for migration.
+
+### Run
 ```bash
 npm run dev
 ```
