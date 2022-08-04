@@ -66,7 +66,7 @@ const Navbar = () => {
 
       <Wrapper>
       {links.map((item: any, index: any) => (
-          <NavLink href={`/${item.path}`}><StyledNavLink>{item.title}</StyledNavLink></NavLink>
+          <NavLink href={`/${item.path}`} key={index}><StyledNavLink>{item.title}</StyledNavLink></NavLink>
       ))}
       </Wrapper>
     </HeaderContainer>
