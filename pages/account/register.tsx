@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Alert, Box, Button, CircularProgress, Container, Link, Stack, TextField, Typography } from '@mui/material';
@@ -55,9 +56,7 @@ const RegisterPage = () => {
       <br />
       <Typography align="center" variant="h4">Register</Typography>
 
-      <Box component="form" onSubmit={
-        void handleSubmit
-      }>
+      <Box component="form" onSubmit={handleSubmit}>
 
         <TextField
           margin="normal"

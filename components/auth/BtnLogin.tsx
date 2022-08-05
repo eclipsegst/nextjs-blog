@@ -13,14 +13,19 @@ const BtnLogin = ({ children, provider, csrfToken, options }) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const providerId = provider.id as string
 
-  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
     setLoading(true)
-    const res = await signIn(providerId, (options as SignInOptions))
+    console.log("inx")
+    console.log(options)
+    const res = await signIn("credentials", (options as SignInOptions))
     setLoading(false)
 
     if (providerId === "credentials") {
       if (res.error) {
+        console.log("inx error")
+        console.log(res)
         return toast.error(res.error)
       }
       toast.success("Successfully login...");

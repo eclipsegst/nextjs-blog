@@ -20,7 +20,7 @@ const LoginForm = ({ provider, csrfToken }) => {
         id="username"
         label="Username"
         name="username"
-        autoComplete="email"
+        autoComplete="username"
         autoFocus
         value={username}
         onChange={e => setUsername(e.target.value)}

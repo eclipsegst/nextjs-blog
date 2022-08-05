@@ -7,7 +7,7 @@ import FacebookProvider from "next-auth/providers/facebook"
 import GithubProvider from "next-auth/providers/github"
 // import AppleProvider from "next-auth/providers/apple"
 // import EmailProvider from "next-auth/providers/email"
-
+import bcrypt from "bcryptjs";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient, Prisma, User } from "@prisma/client"
 
@@ -160,23 +160,84 @@ async function createAndLinkAccount(providerAccount, existingUser: User) {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const loginUser = async ({username, password}) => {
+  console.log(username, password)
   if(!password) {
-    throw new Error("Accounts Have to login with password.");
+    throw new Error("Accounts have to login with password.");
   }
 
-  // // perform a database call
-  // async function getUser() {
-  //   const user = await prisma.user.findUnique({
-  //     where: { "username" : username }
-  //   });
-  //   return user;
-  // }
-  // // return the user for login
-  // const user = await getUser();
-  // const isMatch = await bcrypt.compare(password, user.password);
-  // if(!isMatch) {
-  //   throw new Error("Password Incorrect.");
-  // }
+  // perform a database call
+  async function getUser() {
+    const user = await prisma.user.findUnique({
+      where: { username: username }
+    });
+    return user;
+  }
+  // return the user for login
+  const user = await getUser();
+  if (user === null) {
+    throw new Error("User not found.");
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const isMatch = await bcrypt.compare(password as string, user.password);
+  if(!isMatch) {
+    throw new Error("Password Incorrect.");
+  }
 
-  // return user;
+  console.log("signIn success", user)
+
+  return user;
 };
+
+export const registerBasicUser = async({email, username, password }) => {
+  // empty validation
+  if(!email) {
+    throw new Error("Email cannot be empty");
+  }
+  if(!username) {
+    throw new Error("Username cannot be empty");
+  }
+  if(!password) {
+    throw new Error("Password cannot be empty");
+  }
+  // check existing record validation
+  async function validateUser(criteria, value) {
+    // let whereClause = {};
+    // whereClause[criteria] = value;
+    const user = await prisma.user.findUnique({
+      where: { [criteria] : value }
+    });
+    return user;
+  }
+  const validateUsernameExist = await validateUser("username" , username);
+  if(validateUsernameExist !== null) {
+    throw new Error("This username existed, please choose another username.");
+  }
+  const validateEmailExist = await validateUser("email" , email);
+  if(validateEmailExist !== null) {
+    throw new Error("This email existed, please choose another email.");
+  }
+
+  // encrypt the password
+  const saltRounds = 10;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const hashPass = await bcrypt.hash(password as string, saltRounds)
+  // save the record into the database
+  async function createUser() {
+    const user = {
+      "email": email,
+      "username": username,
+      "password": hashPass,
+    };
+    const _createUser = await prisma.user.create({ data: user });
+    return _createUser;
+  }
+
+  return createUser()
+  .catch((e) => {
+    throw e
+  })
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  .finally(async () => {
+    await prisma.$disconnect()
+  });
+}
