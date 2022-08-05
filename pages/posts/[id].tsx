@@ -1,4 +1,4 @@
-import Layout, { Title } from '../../components/Layout'
+import Layout from '../../components/Layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
 import styles from '../../styles/utils.module.css'

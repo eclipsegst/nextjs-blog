@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import styles from './layout.module.css'
 import Navbar from './Navbar'
 import Header from "./header"
 import Footer from './Footer'
@@ -57,8 +55,7 @@ const ContentWrapper = styled.div`
 `
 
 export default function Layout({
-  children,
-  home
+  children
 }: {
   children: React.ReactNode
   home?: boolean
@@ -66,7 +63,7 @@ export default function Layout({
   return (
     <Container>
       <Header />
-      {/* <Navbar/> */}
+      <Navbar/>
       <ContentWrapper>{children}</ContentWrapper>
       <Footer/>
     </Container>

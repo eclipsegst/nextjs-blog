@@ -1,9 +1,7 @@
 import React from "react"
-import Link from 'next/link'
 import styled from "styled-components"
-import styles from "./layout.module.css";
 import rem from '../utils/rem';
-import { grey, paleGrey, red } from '../utils/colors';
+import { grey, paleGrey } from '../utils/colors';
 
 const Wrapper = styled.footer`
   min-height: 60px;

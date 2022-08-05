@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <SessionProvider
         // Provider options are not required but can be useful in situations where
         // you have a short session maxAge time. Shown here with default values.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         session={pageProps.session}
       >
         <Component {...pageProps} />

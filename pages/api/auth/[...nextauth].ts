@@ -1,15 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import GithubProvider from "next-auth/providers/github"
-import TwitterProvider from "next-auth/providers/twitter"
-import Auth0Provider from "next-auth/providers/auth0"
 // import AppleProvider from "next-auth/providers/apple"
 // import EmailProvider from "next-auth/providers/email"
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient, Prisma } from "@prisma/client"
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { PrismaClient, Prisma, User } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
@@ -66,7 +65,7 @@ export const authOptions: NextAuthOptions = {
       return token
     },
     // https://next-auth.js.org/configuration/callbacks#sign-in-callback
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ account, profile }) {
       console.log("provider: " + account.provider)
       
       // This will automatically link the existing user to the 3rd party provider account, e.g. Google, Apple, Github.
@@ -83,7 +82,7 @@ export const authOptions: NextAuthOptions = {
       const existingUser = await getUserByUser(profile.email);
       if (existingUser) {
         if (account.provider === "google" || account.provider === "github") {
-          createAndLinkAccount(account, existingUser)
+          await createAndLinkAccount(account, existingUser)
           return true
         }
       }
@@ -98,14 +97,14 @@ export const authOptions: NextAuthOptions = {
 
 export default NextAuth(authOptions)
 
-async function getUserByUser(email) {
+async function getUserByUser(email: string) {
   const user = await prisma.user.findUnique({
-    where: { "email" : email }
+    where: { "email" : email}
   });
   return user;
 }
 
-async function createAndLinkAccount(providerAccount, existingUser) {
+async function createAndLinkAccount(providerAccount, existingUser: User) {
   const account = {
     "type": providerAccount.type,
     "provider": providerAccount.provider,

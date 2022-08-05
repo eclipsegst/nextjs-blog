@@ -6,18 +6,24 @@ import AccessDenied from "../components/access-denied"
 export default function ProtectedPage() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
-  const [content, setContent] = useState()
+  const [content, setContent] = useState<string | null>(null);
 
   // Fetch content from protected route
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/api/examples/protected")
-      const json = await res.json()
+      
+      type JSONResponse = {
+        content: string,
+        error: string
+      }
+
+      const json = await res.json() as JSONResponse
       if (json.content) {
         setContent(json.content)
       }
     }
-    fetchData()
+    void fetchData()
   }, [session])
 
   // When rendering client side don't display anything until loading is complete

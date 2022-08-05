@@ -21,6 +21,7 @@ export const blmLightGrey = lighten(0.75, 'rgb(33, 33, 33)');
 
 export const blmMetal = 'rgb(66, 66, 66)';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Colors = {
   cherry: "#F9193F",
   mars: "#F19037",

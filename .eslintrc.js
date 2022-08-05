@@ -11,4 +11,8 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
+  rules: {
+    "require-await": "off",
+    "@typescript-eslint/require-await": "off"
+  }
 };

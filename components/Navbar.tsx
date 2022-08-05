@@ -65,7 +65,7 @@ const Navbar = () => {
       </Link>
 
       <Wrapper>
-      {links.map((item: any, index: any) => (
+      {links.map((item: { path: string, title: string }, index: number) => (
           <NavLink href={`${item.path}`} key={index}><StyledNavLink>{item.title}</StyledNavLink></NavLink>
       ))}
       </Wrapper>

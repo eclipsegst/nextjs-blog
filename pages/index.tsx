@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import Layout, { Title } from '../components/Layout'
 import styles from '../styles/Home.module.css'
 
