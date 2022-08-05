@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import NextAuth, { NextAuthOptions } from "next-auth"
+import CredentialProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import GithubProvider from "next-auth/providers/github"
@@ -34,6 +35,24 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     */
+    CredentialProvider({
+      name: "credentials",
+      credentials: {
+        username: {
+          label: "Username",
+          type: "text",
+          placeholder: "",
+        },
+        password: { label: "Password", type: "password" }
+      },
+      authorize: async (credential) => {
+        // get the credentials
+        const username = credential.username;
+        const password = credential.password;
+        // perform a database call & login
+        return loginUser({ username, password });
+      }
+    }),
     GoogleProvider({
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
@@ -58,6 +77,13 @@ export const authOptions: NextAuthOptions = {
   ],
   theme: {
     colorScheme: "light",
+  },
+  pages: {
+    signIn: '/account/signin',  // Displays signin page
+    // signOut: '/auth/signout', // Displays form with sign out button
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // Used for check email page
+    // newUser: null // If set, new users will be directed here on first sign in
   },
   callbacks: {
     async jwt({ token }) {
@@ -131,3 +157,26 @@ async function createAndLinkAccount(providerAccount, existingUser: User) {
     }
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const loginUser = async ({username, password}) => {
+  if(!password) {
+    throw new Error("Accounts Have to login with password.");
+  }
+
+  // // perform a database call
+  // async function getUser() {
+  //   const user = await prisma.user.findUnique({
+  //     where: { "username" : username }
+  //   });
+  //   return user;
+  // }
+  // // return the user for login
+  // const user = await getUser();
+  // const isMatch = await bcrypt.compare(password, user.password);
+  // if(!isMatch) {
+  //   throw new Error("Password Incorrect.");
+  // }
+
+  // return user;
+};
