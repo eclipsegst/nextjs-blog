@@ -79,11 +79,13 @@ export const authOptions: NextAuthOptions = {
       // - if there's no such user, an user will be created automatically in User table
       // - if there exist such user, a 3rd party provider account will be created in Account table and is linked with this user.
       // 
-      const existingUser = await getUserByUser(profile.email);
-      if (existingUser) {
-        if (account.provider === "google" || account.provider === "github") {
-          await createAndLinkAccount(account, existingUser)
-          return true
+      if (account.provider !== "credentials") {
+        const existingUser = await getUserByUser(profile.email);
+        if(existingUser) {
+          if (account.provider === "google" || account.provider === "github") {
+            await createAndLinkAccount(account, existingUser)
+            return true
+          }
         }
       }
 
