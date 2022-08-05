@@ -8,7 +8,8 @@ import Auth0Provider from "next-auth/providers/auth0"
 // import EmailProvider from "next-auth/providers/email"
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, Prisma } from "@prisma/client"
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 const prisma = new PrismaClient()
 
@@ -64,8 +65,68 @@ export const authOptions: NextAuthOptions = {
       token.userRole = "admin"
       return token
     },
+    // https://next-auth.js.org/configuration/callbacks#sign-in-callback
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("provider: " + account.provider)
+      
+      // This will automatically link the existing user to the 3rd party provider account, e.g. Google, Apple, Github.
+      // If we have an existing user in User table, we want to use Google provider to login, 
+      // and the email is the same in User table, we will get error message like 
+      // "To confirm your identity, sign in with the same account you used originally."
+      // If there exists an user, which means we use one of the way, username, email or auth provider
+      // with the same email before. Here's how it works,
+      // Step 1: find if there exists User by the email
+      // Step 2: 
+      // - if there's no such user, an user will be created automatically in User table
+      // - if there exist such user, a 3rd party provider account will be created in Account table and is linked with this user.
+      // 
+      const existingUser = await getUserByUser(profile.email);
+      if (existingUser) {
+        if (account.provider === "google" || account.provider === "github") {
+          createAndLinkAccount(account, existingUser)
+          return true
+        }
+      }
+
+      return true
+    }
   },
   adapter: PrismaAdapter(prisma),
+  // Enable debug messages in the console if you are having problems
+  debug: false,
 }
 
 export default NextAuth(authOptions)
+
+async function getUserByUser(email) {
+  const user = await prisma.user.findUnique({
+    where: { "email" : email }
+  });
+  return user;
+}
+
+async function createAndLinkAccount(providerAccount, existingUser) {
+  const account = {
+    "type": providerAccount.type,
+    "provider": providerAccount.provider,
+    "providerAccountId": providerAccount.providerAccountId,
+    "access_token": providerAccount.access_token,
+    "expires_at": providerAccount.expires_at,
+    "token_type": providerAccount.token_type,
+    "scope": providerAccount.scope,
+    "id_token": providerAccount.id_token,
+    "userId": existingUser.id,
+  };
+
+  try {
+    const _createAccount = await prisma.account.create({ data: account})
+    return _createAccount
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      // Ignore if it's "Unique constraint failed on the fields: (`provider`,`providerAccountId`)".
+      console.warn(e)  
+    } else {
+      reportError(e)
+    }
+  }
+}
