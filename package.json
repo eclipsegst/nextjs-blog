@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint '*/**/*.{js,ts,tsx}'"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -30,7 +31,10 @@
   "devDependencies": {
     "@types/node": "^16.11.6",
     "@types/react": "^17.0.43",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
+    "eslint": "^8.21.0",
     "prisma": "^4.1.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.7.4"
   }
 }
