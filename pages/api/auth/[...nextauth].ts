@@ -75,6 +75,9 @@ export const authOptions: NextAuthOptions = {
     //   issuer: process.env.AUTH0_ISSUER,
     // }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   theme: {
     colorScheme: "light",
   },
