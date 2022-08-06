@@ -6,7 +6,11 @@
 
 Step 1. create a schema file in `prisma/schema.prisma` by following up the setup link and a .env file `prisma/.env`.
 
-For `prisma/.env`, we need to add `DATABASE_URL` like,
+[.env file locations](https://www.prisma.io/docs/guides/development-environment/environment-variables#using-env-files):
+- In the root folder of your project (`./.env`)
+- From the ./prisma folder(`./prisma/.env`)
+
+For `prisma/.env`, we need to add [`DATABASE_URL`](https://www.prisma.io/docs/guides/development-environment/environment-variables#example-set-the-database_url-environment-variable-in-an-env-file) like,
 
 ```
 DATABASE_URL=postgresql://db_username:db_password@localhost:5432/db_name?schema=public
