@@ -4,12 +4,8 @@ import Link from 'next/link'
 import styles from "./layout.module.css";
 import { paleGrey } from '../utils/colors';
 import rem from '../utils/rem';
-
-export const links = [
-  { path: "/", title: "Home" },
-  { path: "/blogs", title: "Blogs" },
-  { path: "/about", title: "About" },
-]
+import SignInSignOut from "./SignInSignOut"
+import { useSession } from "next-auth/react"
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -39,7 +35,7 @@ const NavLink = styled(Link).attrs((/* props */) => ({
   color: currentColor;
 `;
 
-const StyledNavLink = styled(styled.a``)`
+export const StyledNavLink = styled(styled.a``)`
   // margin: 20px 0 10px;
   padding: 15px;
   font-weight: bold;
@@ -58,6 +54,23 @@ const StyledNavLink = styled(styled.a``)`
 `;
 
 const Navbar = () => {
+  const links = [
+    { path: "/", title: "Home" },
+    { path: "/blogs", title: "Blogs" },
+    { path: "/about", title: "About" },  
+  ]
+
+  const { data: session, status } = useSession()
+  // After login
+  if (session) {
+    [ { path: "/client", title: "Client" },
+      { path: "/server", title: "Server" },
+      { path: "/api-example", title: "api-example" },
+    ].forEach(element => {
+      links.push(element)  
+    });
+  }
+
   return ( 
     <HeaderContainer>
       <Link href='/'>
@@ -68,6 +81,7 @@ const Navbar = () => {
       {links.map((item: { path: string, title: string }, index: number) => (
           <NavLink href={`${item.path}`} key={index}><StyledNavLink>{item.title}</StyledNavLink></NavLink>
       ))}
+      <SignInSignOut />
       </Wrapper>
     </HeaderContainer>
   )

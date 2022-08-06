@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { registerBasicUser } from "../auth/[...nextauth]";
 
 export default async (req, res) => {
@@ -14,7 +18,7 @@ export default async (req, res) => {
     const email = req.body.email;
 
     try {
-      const result = await registerBasicUser({ email, username, password });
+      await registerBasicUser({ email, username, password });
       const successMsg = `Username ${username} Created Successfully`;
       console.log(successMsg);
       res.status(200).json({ "message": successMsg });

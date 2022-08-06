@@ -1,5 +1,4 @@
 import Navbar from './Navbar'
-import Header from "./header"
 import Footer from './Footer'
 import styled, { css } from 'styled-components';
 import rem from '../utils/rem';
@@ -62,7 +61,6 @@ export default function Layout({
 }) {
   return (
     <Container>
-      <Header />
       <Navbar/>
       <ContentWrapper>{children}</ContentWrapper>
       <Footer/>
