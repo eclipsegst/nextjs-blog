@@ -1,5 +1,15 @@
 import Layout, { Title } from '../components/Layout'
 import styles from '../styles/Home.module.css'
+import styled from "styled-components";
+
+export const Grid = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin-top: 3rem;
+`;
 
 export default function Home() {
   return (
@@ -11,7 +21,7 @@ export default function Home() {
         <code className={styles.code}>pages/index.js</code>
       </p>
         
-      <div className={styles.grid}>
+      <Grid>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
@@ -39,7 +49,7 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
-        </div>
+        </Grid>
     </Layout>
   )
 }

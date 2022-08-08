@@ -3,11 +3,27 @@
 import React, { useEffect } from 'react'
 import { getProviders, getSession, getCsrfToken, signIn } from 'next-auth/react'
 import Router from 'next/router'
+import Layout from '../../components/Layout'
 
 import LoginForm from '../../components/auth/LoginForm'
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Stack } from '@mui/material';
 import { CtxOrReq } from 'next-auth/client/_utils';
 import { Provider } from 'next-auth/providers';
+import styled from 'styled-components';
+import { darkGrey, red } from '../../utils/colors';
+
+import {
+  GoogleLoginButton,
+  FacebookLoginButton,
+  GithubLoginButton,
+} from "react-social-login-buttons";
+
+const MediumText = styled.p`
+  margin: 1.5em 0 0.5em;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${darkGrey};
+`
 
 const Login = ({ providers, session, csrfToken }) => {
 
@@ -24,40 +40,49 @@ const Login = ({ providers, session, csrfToken }) => {
   }, [])
 
   if (session) return null;
+
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography component="h1" variant="h5">Sign in</Typography>
-        <LoginForm provider={providers.credentials}
-          csrfToken={csrfToken as string} />
-      </Box>
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <p className="text-center">Or Login with</p>
-        {Object.values(providers as Provider[])
-          .filter((provider) => provider.name !== "credentials")
-          .map((provider) => (
-            <div key={provider.name}>
-              <button onClick={() => void signIn(provider.id)}>
-                Sign in with {provider.name}
-              </button>
-            </div>
-          ))}
-      </Box>
-    </Container>
+    <Layout>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">Sign in</Typography>
+          <LoginForm provider={providers.credentials}
+            csrfToken={csrfToken as string} />
+
+          <MediumText className="text-center" color=''>Or</MediumText>
+        </Box>
+        <div>
+          {Object.values(providers as Provider[])
+            .filter((provider) => provider.name !== "credentials")
+            .map((provider) =>
+              (() => {
+                switch (provider.id) {
+                  case "google":
+                    return (
+                      <GoogleLoginButton onClick={() => void signIn(provider.id)} />
+                    )
+                  case "github":
+                    return (
+                      <GithubLoginButton onClick={() => void signIn(provider.id)} />
+                    )
+                  case "facebook":
+                    return (
+                      <FacebookLoginButton onClick={() => void signIn(provider.id)} />
+                    )
+                }
+                return null;
+              })()
+            )}
+        </div>
+      </Container>
+    </Layout>
   )
 }
 

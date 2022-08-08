@@ -26,17 +26,16 @@ const LoginForm = ({ provider, csrfToken }) => {
         onChange={e => setUsername(e.target.value)}
       />
       <TextField
-        margin="normal"
-        required
-        fullWidth
-        id="password"
-        label="password"
-        name="password"
-        autoComplete="password"
-        autoFocus
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
+          margin="normal"
+          required
+          fullWidth
+          id="password"
+          label="password"
+          name="password"
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
     </BtnLogin>
   )
 }

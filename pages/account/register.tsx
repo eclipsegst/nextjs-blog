@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Alert, Box, Button, CircularProgress, Container, Link, Stack, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import Layout from '../../components/Layout'
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -53,66 +54,69 @@ const RegisterPage = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <br />
-      <Typography align="center" variant="h4">Register</Typography>
-
-      <Box component="form" onSubmit={handleSubmit}>
-
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email"
-          type="email"
-          autoFocus
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="username"
-          label="Username"
-          name="username"
-          autoFocus
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-        />
-
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="password"
-          label="password"
-          name="password"
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
+    <Layout>
+      <Container component="main" maxWidth="xs">
         <br />
-        <Stack alignItems="center">
-          <Link href="/">
-            Go Back
-          </Link>
-          <Button type="submit" variant="contained" style={{ margin: "1em" }}>
-            Sign Up
-          </Button>
-        </Stack>
+        <Box component="form" onSubmit={handleSubmit}>
 
-        {isLoading ? <Box mt={3}><CircularProgress size={24} /> Loading...</Box> : null}
-        {statusMessage !== "" &&
-          <Box mt={3}>
-            <Alert severity={statusMessage.toLowerCase().includes("success") ? "success" : "error"}>{statusMessage}</Alert>
-          </Box>
-        }
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email"
+            type="email"
+            autoFocus
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
 
-      </Box>
-    </Container>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoFocus
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="password"
+            label="password"
+            name="password"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+          <br />
+          <Stack alignItems="center">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              style={{ textTransform: 'none' }}
+            >
+              Sign Up
+            </Button>
+          </Stack>
+
+          {isLoading ? <Box mt={3}><CircularProgress size={24} /> Loading...</Box> : null}
+          {statusMessage !== "" &&
+            <Box mt={3}>
+              <Alert severity={statusMessage.toLowerCase().includes("success") ? "success" : "error"}>{statusMessage}</Alert>
+            </Box>
+          }
+
+        </Box>
+      </Container>
+    </Layout>
   );
 };
 

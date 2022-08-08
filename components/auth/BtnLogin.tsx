@@ -49,25 +49,17 @@ const BtnLogin = ({ children, provider, csrfToken, options }) => {
         fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
+        style={{textTransform: 'none'}}
       >
-        Sign in with {providerId}
+        Login In
       </Button>
 
       {loading && <Loading />}
 
-      <Grid container>
-        <Grid item xs>
-          {
-            <Link href="/" variant="body2">
-              Go Back
-            </Link>
-          }
-        </Grid>
-        <Grid item>
-          <Link href="/account/register/" variant="body2">
-            {"Don't have an account? Sign Up"}
-          </Link>
-        </Grid>
+      <Grid container justifyContent="center">
+        <Link href="/account/register/" variant="body2">
+          {"Don't have an account? Sign Up"}
+        </Link>
       </Grid>
     </Box>
   )
