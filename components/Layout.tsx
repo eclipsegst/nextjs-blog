@@ -5,12 +5,12 @@ import rem from '../utils/rem';
 import { mobile } from '../utils/media';
 import { sidebarWidth } from '../utils/sizes';
 import { bodyFont, headerFont } from '../utils/fonts';
-import { blmMetal } from '../utils/colors';
+import { blmMetal, paleGrey } from '../utils/colors';
 
 // Whole page container
 const Container = styled.div`
   padding: 0em;
-  // background: papayawhip;
+  background-color: ${paleGrey};
   min-height: calc(100vh + 60px); // Footer will be not visible on loading.
   // min-height: 100vh;
 
@@ -61,9 +61,9 @@ export default function Layout({
 }) {
   return (
     <Container>
-      <Navbar/>
+      <Navbar />
       <ContentWrapper>{children}</ContentWrapper>
-      <Footer/>
+      <Footer />
     </Container>
   )
 }

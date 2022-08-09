@@ -68,3 +68,8 @@ button:focus {
   outline: none;
 
 }
+
+nav {
+  position: sticky;
+  top: 0rem;
+}

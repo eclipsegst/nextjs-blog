@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import rem from '../utils/rem';
-import { grey, paleGrey } from '../utils/colors';
+import { grey } from '../utils/colors';
 
 const Wrapper = styled.footer`
   min-height: 60px;
@@ -11,7 +11,7 @@ const Wrapper = styled.footer`
   align-items: center;
   text-align: center;
   color: ${grey};
-  background: ${paleGrey};
+  background: #ffffff;
   box-sizing: border-box;
   // margin-top: ${rem(50)};
 `;
